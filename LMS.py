@@ -1,4 +1,5 @@
 import datetime
+
 import os
 
 
@@ -74,6 +75,33 @@ class LMS:
             print("\nBook not found!")
 
             return self.issue_books()
+
+    def add_books(self):
+        new_books = input("Enter the book title:")
+
+        if new_books == "":
+            return self.add_books()
+
+        elif len(new_books) > 25:
+            print(
+                "Book title length is too long!! "
+                "Title should be of 25 characters"
+            )
+            return self.add_books()
+
+        else:
+            with open(self.list_of_books, "a") as bk:
+                bk.writelines(f"{new_books}\n")
+
+                self.book_dict.update({
+                    str(int(max(self.book_dict)) + 1): {
+                        "book_title": new_books,
+                        "lender_name": "",
+                        "issue_date": "",
+                        "status": "Available"
+                    }
+                })
+                print(f"This book '{new_books}' has been added successfully!!!")
 
 
 l = LMS("List_of_books.txt", "Python's Library")
