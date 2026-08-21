@@ -120,6 +120,59 @@ class LMS:
             else:
                 print("Book Id isn ot found")
 
+try:
+    myLMS = LMS("List_of_books.txt", "Python's Library")
+
+    press_key_list = {
+        "D": "Display Books",
+        "I": "Issue Book",
+        "A": "Add Book",
+        "R": "Return Book",
+        "Q": "Quit"
+    }
+
+    key_press = ""
+
+    while key_press != "q":
+
+        print(
+            f"\n------------------------------------"
+            f"Welcome to {myLMS.library_name} "
+            f"Library Management System"
+            f"------------------------------------\n"
+        )
+
+        for key, value in press_key_list.items():
+            print("Press", key, "To", value)
+
+        key_press = input("\nPress key: ").lower()
+
+        if key_press == "i":
+            print("\nCurrent Selection: Issue Book")
+            myLMS.issue_books()
+
+        elif key_press == "d":
+            print("\nCurrent Selection: Display Books")
+            myLMS.display_books()
+
+        elif key_press == "a":
+            print("\nCurrent Selection: Add Book")
+            myLMS.add_books()
+
+        elif key_press == "r":
+            print("\nCurrent Selection: Return Book")
+            myLMS.return_books()
+
+        elif key_press == "q":
+            print("\nThank you for using the Library Management System!")
+            break
+
+        else:
+            print("\nInvalid selection! Please choose D, I, A, R, or Q.")
+
+except FileNotFoundError:
+    print("List_of_books.txt was not found.")
+
 l = LMS("List_of_books.txt", "Python's Library")
 
 l.display_books()
